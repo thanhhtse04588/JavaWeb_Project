@@ -5,15 +5,22 @@
  */
 package controller;
 
+import entity.Wanted;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.WantedModel;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -21,6 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author Muscle_Life
  */
+@MultipartConfig
 public class WantedServlet extends HttpServlet {
 
     /**
@@ -33,18 +41,13 @@ public class WantedServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     // location to store file uploaded
-    private static final String UPLOAD_DIRECTORY = "upload";
 
-    // upload settings
-    private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;  // 3MB
-    private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
-    private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, FileUploadException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            // configures upload settings
 
         }
     }
@@ -61,7 +64,13 @@ public class WantedServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (FileUploadException ex) {
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -72,71 +81,65 @@ public class WantedServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static String FOLDER_UPLOAD = "image";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                    if (!ServletFileUpload.isMultipartContent(request)) {
-                // if not, we stop here
-                PrintWriter writer = response.getWriter();
-                writer.println("Error: Form must has enctype=multipart/form-data.");
-                writer.flush();
-                return;
-            }
-
-            // configures upload settings
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            int MEMORY_THRESHOLD = 0;
-            // sets memory threshold - beyond which files are stored in disk 
-            factory.setSizeThreshold(MEMORY_THRESHOLD);
-            // sets temporary location to store files
-            factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-
-            ServletFileUpload upload = new ServletFileUpload(factory);
-
-            // sets maximum size of upload file
-            upload.setFileSizeMax(MAX_FILE_SIZE);
-
-            // sets maximum size of request (include file + form data)
-            upload.setSizeMax(MAX_REQUEST_SIZE);
-
-            // constructs the directory path to store upload file
-            // this path is relative to application's directory
-            String uploadPath = getServletContext().getRealPath("")
-                    + File.separator + UPLOAD_DIRECTORY;
-
-            // creates the directory if it does not exist
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
+                    DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+            String nameImg =""  ; // file path
             try {
-                // parses the request's content to extract file data
-                @SuppressWarnings("unchecked")
-                List<FileItem> formItems = upload.parseRequest(request);
+                List<FileItem> fileItems = upload.parseRequest(request);
+                for (FileItem fileItem : fileItems) {
+                    if (!fileItem.isFormField()) {
+                        // xử lý file
+                        nameImg = new File(fileItem.getName()).getName();
+                        if (!nameImg.equals("")) {
 
-                if (formItems != null && formItems.size() > 0) {
-                    // iterates over form's fields
-                    for (FileItem item : formItems) {
-                        // processes only fields that are not form fields
-                        if (!item.isFormField()) {
-                            String fileName = new File(item.getName()).getName();
-                            String filePath = uploadPath + File.separator + fileName;
-                            File storeFile = new File(filePath);
-
-                            // saves the file on disk
-                            item.write(storeFile);
-                            request.setAttribute("url", UPLOAD_DIRECTORY + "/" + fileName);
+                            String dirUrl = request.getServletContext().getRealPath("") + File.separator + FOLDER_UPLOAD; // folder path
+                            File dir = new File(dirUrl);
+                            if (!dir.exists()) {
+                                dir.mkdir();
+                            }
+                            String imageUrl = dirUrl + File.separator + nameImg;
+                            File file = new File(imageUrl);
+                            try {
+                                fileItem.write(file);
+                                System.out.println("UPLOAD SUCCESSFUL...!");
+                            } catch (Exception e) {
+                                System.out.println("UPLOAD FAILED...!");
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-            } catch (Exception ex) {
-                request.setAttribute("message",
-                        "There was an error: " + ex.getMessage());
+            } catch (FileUploadException e) {
+                e.printStackTrace();
             }
-            // redirects client to message page
-            getServletContext().getRequestDispatcher("/message.jsp").forward(
-                    request, response);
+            //end upload
+            
+            String imgUrl = FOLDER_UPLOAD +"/" + nameImg;
+            String crimeName = request.getParameter("cName");
+            String gender = request.getParameter("gender");
+            String country = request.getParameter("country");
+            Date dob = Date.valueOf(request.getParameter("dob"));
+            String offense = request.getParameter("offence");
+            int cTypeID = Integer.valueOf(request.getParameter("cType"));
+            int mID = Integer.valueOf(request.getParameter("mUnitID"));
+            Date wDate = Date.valueOf(request.getParameter("wantedDate"));
+            String status = request.getParameter("status");
+            String detail = request.getParameter("detail");
+            WantedModel model = new WantedModel();
+            
+        try {
+            model.addWanted(new Wanted(imgUrl, crimeName, gender, country, dob, offense, cTypeID, mID, wDate, status, detail));
+        } catch (Exception ex) {
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            getServletContext().getRequestDispatcher("/add.jsp").forward(request, response);
+           
+
     }
 
     /**
