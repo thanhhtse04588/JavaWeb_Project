@@ -18,6 +18,20 @@ import java.util.List;
  */
 public class CrimeTypeModel {
 
+    public static String getCrimeTypeNameByID(int CrimeTypeID) throws Exception {
+       Connection conn = new DBContext().getConnection();
+       String query = "SELECT * FROM CrimeType WHERE CrimeTypeID ="+ CrimeTypeID;
+       String name ="";
+       ResultSet rs= conn.prepareStatement(query).executeQuery();
+       while(rs.next()){
+           name = rs.getString("CrimeTypeID");
+       }
+       rs.close();
+       conn.close();
+       return name;
+    }
+
+
     public List<CrimeType> selectAll() throws Exception {
         Connection conn = new DBContext().getConnection();
         String query = "SELECT * FROM CrimeType ";

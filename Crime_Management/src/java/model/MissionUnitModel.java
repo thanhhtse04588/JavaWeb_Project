@@ -17,6 +17,19 @@ import java.util.List;
  * @author Muscle_Life
  */
 public class MissionUnitModel {
+
+    public static String getMissionUnitNameByID(int mID) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "SELECT * FROM MissionUnit WHERE MissionUnitID="+mID;
+        ResultSet rs = conn.prepareStatement(query).executeQuery();
+        String name = "";
+        while(rs.next()){
+            name = rs.getString("MissionUnitName");
+        }
+        rs.close();
+        conn.close();
+        return name;
+    }
      public List<MissionUnit> selectAll() throws Exception {
         Connection conn = new DBContext().getConnection();
         String query = "SELECT * FROM MissionUnit";

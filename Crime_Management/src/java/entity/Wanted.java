@@ -6,14 +6,19 @@
 package entity;
 
 import java.sql.Date;
+import model.CrimeTypeModel;
+import model.MissionUnitModel;
+import model.PrisonModel;
 
 /**
  *
  * @author Muscle_Life
  */
 public class Wanted {
+
+    int wID;
     String image;
-    String crimeName;
+    String cName;
     String gender;
     String country;
     Date dob;
@@ -21,24 +26,61 @@ public class Wanted {
     int cTypeID;
     int mID;
     Date wDate;
+    Date cDate;
+    int pID;
     String status;
     String detail;
+    
+    public String getCrimeTypeName() throws Exception{
+        return CrimeTypeModel.getCrimeTypeNameByID(cTypeID);
+    }
+    public String getMissionUnitName() throws Exception{
+        return MissionUnitModel.getMissionUnitNameByID(mID) ;
+    }
+    public String getPrisonName() throws Exception{
+        return PrisonModel.getPrisonNameByID(pID);
+    }
 
     public Wanted() {
     }
 
-    public Wanted(String image, String crimeName, String gender, String country, Date dob, String offense, int cTypeName, int mID, Date wDate, String status, String detail) {
+    public Wanted(String image, String cName, String gender, String country, Date dob, String offense, int cTypeID, int mID, Date wDate, String status, String detail) {
         this.image = image;
-        this.crimeName = crimeName;
+        this.cName = cName;
         this.gender = gender;
         this.country = country;
         this.dob = dob;
         this.offense = offense;
-        this.cTypeID = cTypeName;
+        this.cTypeID = cTypeID;
         this.mID = mID;
         this.wDate = wDate;
         this.status = status;
         this.detail = detail;
+    }
+
+    public Wanted(int wID, String image, String cName, String gender, String country, Date dob, String offense, int cTypeID, int mID, Date wDate, Date cDate, int pID, String status, String detail) {
+        this.wID = wID;
+        this.image = image;
+        this.cName = cName;
+        this.gender = gender;
+        this.country = country;
+        this.dob = dob;
+        this.offense = offense;
+        this.cTypeID = cTypeID;
+        this.mID = mID;
+        this.wDate = wDate;
+        this.cDate = cDate;
+        this.pID = pID;
+        this.status = status;
+        this.detail = detail;
+    }
+
+    public int getwID() {
+        return wID;
+    }
+
+    public void setwID(int wID) {
+        this.wID = wID;
     }
 
     public String getImage() {
@@ -49,12 +91,12 @@ public class Wanted {
         this.image = image;
     }
 
-    public String getCrimeName() {
-        return crimeName;
+    public String getcName() {
+        return cName;
     }
 
-    public void setCrimeName(String crimeName) {
-        this.crimeName = crimeName;
+    public void setcName(String cName) {
+        this.cName = cName;
     }
 
     public String getGender() {
@@ -89,12 +131,12 @@ public class Wanted {
         this.offense = offense;
     }
 
-    public int getcTypeName() {
+    public int getcTypeID() {
         return cTypeID;
     }
 
-    public void setcTypeName(int cTypeName) {
-        this.cTypeID = cTypeName;
+    public void setcTypeID(int cTypeID) {
+        this.cTypeID = cTypeID;
     }
 
     public int getmID() {
@@ -113,6 +155,22 @@ public class Wanted {
         this.wDate = wDate;
     }
 
+    public Date getcDate() {
+        return cDate;
+    }
+
+    public void setcDate(Date cDate) {
+        this.cDate = cDate;
+    }
+
+    public int getpID() {
+        return pID;
+    }
+
+    public void setpID(int pID) {
+        this.pID = pID;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -128,6 +186,5 @@ public class Wanted {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-    
-    
+
 }
