@@ -1,11 +1,11 @@
 <%-- 
-    Document   : wantedtable
-    Created on : Jul 23, 2018, 5:37:00 AM
+    Document   : missionunit
+    Created on : Jul 23, 2018, 3:55:46 PM
     Author     : Muscle_Life
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,19 @@
     </head>
     <body>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
-        <table border="1" cellspacing="2" >
+        <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
+        <<jsp:setProperty name="w" property="*"/>
+        <form action="missionunit.jsp">
+            <b>Select an MissionUnit:</b> 
+            <select name="missID" onchange="document.forms[0].submit()">
+                <option value="" ${param.missID ==""? "selected": ""}> </option>
+                <c:forEach var="x" items="${m.selectAll()}">
+                    <option value="${x.mID}" ${x.mID== param.missID? "selected": ""}>
+                        ${x.mName}
+                    </option>
+                </c:forEach>
+            </select>
+            <table border="1" cellspacing="2" >
                 <tr>
                     <th>WantedID</th>
                     <th>Image</th>
@@ -36,5 +48,6 @@
 
                 </c:forEach>
             </table>
+        </form>
     </body>
 </html>

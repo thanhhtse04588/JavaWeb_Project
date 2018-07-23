@@ -19,10 +19,31 @@ import java.util.List;
  * @author Muscle_Life
  */
 public class WantedModel {
+
     private int wantedID;
+    private int missID;
+    private int prisonID;
 
     public WantedModel() {
-        wantedID=-1;
+        wantedID = -1;
+        missID = -1;
+        prisonID = -1;
+    }
+
+    public int getPrisonID() {
+        return prisonID;
+    }
+
+    public void setPrisonID(int prisonID) {
+        this.prisonID = prisonID;
+    }
+
+    public int getMissID() {
+        return missID;
+    }
+
+    public void setMissID(int missID) {
+        this.missID = missID;
     }
 
     public int getWantedID() {
@@ -33,29 +54,36 @@ public class WantedModel {
         this.wantedID = wantedID;
     }
 
-    
     public List<Wanted> selectAll() throws Exception {
         Connection conn = new DBContext().getConnection();
-         String query = "SELECT * FROM WANTED";
-        if(wantedID!=-1)    query = "SELECT * FROM WANTED WHERE WantedID =" +wantedID;
+        String query = "SELECT * FROM WANTED";
+        if (wantedID != -1) {
+            query = "SELECT * FROM WANTED WHERE WantedID =" + wantedID;
+        }
+        if (missID != -1) {
+            query = "SELECT * FROM WANTED WHERE MissionUnitID =" + missID;
+        }
+        if (prisonID != -1) {
+            query = "SELECT * FROM WANTED WHERE PrisonID =" + prisonID;
+        }
         System.out.println(wantedID);
         List<Wanted> wanteds = new ArrayList<>();
         ResultSet rs = conn.prepareStatement(query).executeQuery();
         while (rs.next()) {
-            int wID =rs.getInt("WantedID");
-            String image =rs.getString("Image");
+            int wID = rs.getInt("WantedID");
+            String image = rs.getString("Image");
             String cName = rs.getString("CrimeName");
-            String gender = rs.getString("Gender") ;
-            String country=rs.getString("Country");
-            Date dob= rs.getDate("DOB");
-            String offense=rs.getString("Offense");
-            int cTypeID=rs.getInt("CrimeTypeID");
-            int mID=rs.getInt("MissionUnitID");
-            Date wDate=rs.getDate("WantedDate");
-            Date cDate=rs.getDate("CatchedDate");
-            int pID=rs.getInt("PrisonID");
-            String status=rs.getString("Status");
-            String detail=rs.getString("detail");
+            String gender = rs.getString("Gender");
+            String country = rs.getString("Country");
+            Date dob = rs.getDate("DOB");
+            String offense = rs.getString("Offense");
+            int cTypeID = rs.getInt("CrimeTypeID");
+            int mID = rs.getInt("MissionUnitID");
+            Date wDate = rs.getDate("WantedDate");
+            Date cDate = rs.getDate("CatchedDate");
+            int pID = rs.getInt("PrisonID");
+            String status = rs.getString("Status");
+            String detail = rs.getString("detail");
             wanteds.add(new Wanted(wID, image, cName, gender, country, dob, offense, cTypeID, mID, wDate, cDate, pID, status, detail));
         }
         rs.close();
@@ -68,7 +96,7 @@ public class WantedModel {
         String query = "INSERT INTO Wanted (Image, CrimeName, Gender,Country,DOB,Offense,CrimeTypeID,MissionUnitID,WantedDate,Status,Detail)"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?); ";
         PreparedStatement ps = conn.prepareStatement(query);
-        
+
         ps.setString(1, w.getImage());
         ps.setString(2, w.getcName());
         ps.setString(3, w.getGender());

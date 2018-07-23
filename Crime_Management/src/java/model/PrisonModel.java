@@ -9,6 +9,8 @@ import context.DBContext;
 import entity.Prison;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +29,20 @@ public class PrisonModel {
         rs.close();
         conn.close();
         return name;
+    }
+      public List<Prison> selectAll() throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "SELECT * FROM Prison";
+        List<Prison> p = new ArrayList<>();
+        ResultSet rs = conn.prepareStatement(query).executeQuery();
+        while (rs.next()) {
+        int pID = rs.getInt("PrisonID");
+        String pName = rs.getString("PrisonName");
+            p.add(new Prison(pID, pName));
+        }
+        rs.close();
+        conn.close();
+        return p;
     }
     
 }

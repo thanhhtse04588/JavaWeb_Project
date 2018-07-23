@@ -1,6 +1,6 @@
 <%-- 
-    Document   : wantedtable
-    Created on : Jul 23, 2018, 5:37:00 AM
+    Document   : prison
+    Created on : Jul 23, 2018, 4:34:14 PM
     Author     : Muscle_Life
 --%>
 
@@ -14,7 +14,19 @@
     </head>
     <body>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
-        <table border="1" cellspacing="2" >
+        <jsp:useBean id="p" class="model.PrisonModel" scope="request"/>
+        <<jsp:setProperty name="w" property="*"/>
+        <form action="prison.jsp">
+            <b>Select an Prison:</b> 
+            <select name="prisonID" onchange="document.forms[0].submit()">
+                <option value="" ${param.prisonID ==""? "selected": ""}> </option>
+                <c:forEach var="x" items="${p.selectAll()}">
+                    <option value="${x.pID}" ${x.pID== param.prisonID? "selected": ""}>
+                        ${x.pName}
+                    </option>
+                </c:forEach>
+            </select>
+            <table border="1" cellspacing="2" >
                 <tr>
                     <th>WantedID</th>
                     <th>Image</th>
@@ -36,5 +48,6 @@
 
                 </c:forEach>
             </table>
+        </form>
     </body>
 </html>
