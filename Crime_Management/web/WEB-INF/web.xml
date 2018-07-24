@@ -12,6 +12,10 @@
         <servlet-name>RemoveWantedServlet</servlet-name>
         <servlet-class>controller.RemoveWantedServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateWantedServlet</servlet-name>
+        <servlet-class>controller.CatchedServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WantedServlet</servlet-name>
         <url-pattern>/WantedServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RemoveWantedServlet</servlet-name>
         <url-pattern>/RemoveWantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateWantedServlet</servlet-name>
+        <url-pattern>/UpdateWantedServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

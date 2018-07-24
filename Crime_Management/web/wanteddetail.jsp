@@ -66,7 +66,7 @@
                 <button />
             </table>
                 <br>
-            <a href="edit.jsp?wantedID=${x.wID}"><button>Edit</button></a>
+            <a href="edit.jsp?wantedID=${x.wID}"><button >Edit</button></a>
             <a href="RemoveWantedServlet?wantedID=${x.wID}"><button>Remove</button></a>
         </c:forEach>
 

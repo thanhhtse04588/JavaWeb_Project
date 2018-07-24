@@ -15,26 +15,31 @@
     <body>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
         <table border="1" cellspacing="0.5" >
+            <tr>
+                <th>WantedID</th>
+                <th>Image</th>
+                <th>CrimeName</th>
+                <th>Gender</th>
+                <th>TypeCrime</th>
+                <th>Status</th>
+                <th>Catch</th>
+                <th>Detail</th>
+            </tr>
+            <c:forEach var="x" items="${w.selectAll()}">
                 <tr>
-                    <th>WantedID</th>
-                    <th>Image</th>
-                    <th>CrimeName</th>
-                    <th>Gender</th>
-                    <th>TypeCrime</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach var="x" items="${w.selectAll()}">
-                    <tr>
-                        <td>${x.wID}</td>
-                        <td><image src="${x.image}"/></td>
-                        <td>${x.cName}</td>
-                        <td>${x.gender}</td>
-                        <td>${x.getCrimeTypeName()}</td>
-                        <td>${x.status}</td>
-                        <td><a href="wanteddetail.jsp?wantedID=${x.wID}">See more</a></td>
-                    </tr>  
+                    <td>${x.wID}</td>
+                    <td><image src="${x.image}"/></td>
+                    <td>${x.cName}</td>
+                    <td>${x.gender}</td>
+                    <td>${x.getCrimeTypeName()}</td>
+                    <td>${x.status}</td>
+                    <td><c:if test="${x.status == 'Wanted'}">
+                            <a href="catched.jsp?wantedID=${x.wID}"><button>Catched</button></a>
+                        </c:if></td>
+                    <td><a href="wanteddetail.jsp?wantedID=${x.wID}">See more</a></td>
+                </tr>  
 
-                </c:forEach>
-            </table>
+            </c:forEach>
+        </table>
     </body>
 </html>

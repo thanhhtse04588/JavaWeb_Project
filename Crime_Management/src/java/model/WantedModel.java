@@ -108,7 +108,7 @@ public class WantedModel {
         ps.setDate(9, w.getwDate());
         ps.setString(10, w.getStatus());
         ps.setString(11, w.getDetail());
-        
+
         ps.executeUpdate();
         ps.close();
         conn.close();
@@ -118,7 +118,7 @@ public class WantedModel {
         Connection conn = new DBContext().getConnection();
         String query = "UPDATE Wanted SET CrimeName = ?,Gender = ?,Country = ?,DOB =?, Offense =?, CrimeTypeID =?, MissionUnitID=?, WantedDate=? , Detail=? WHERE WantedID =?;";
         PreparedStatement ps = conn.prepareStatement(query);
-        
+
         ps.setString(1, w.getcName());
         ps.setString(2, w.getGender());
         ps.setString(3, w.getCountry());
@@ -129,7 +129,17 @@ public class WantedModel {
         ps.setDate(8, w.getwDate());
         ps.setString(9, w.getDetail());
         ps.setInt(10, w.getwID());
-        
+
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+    }
+
+    public void removeWanted(int wantedID) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "DELETE FROM Comment WHERE WantedID=" + wantedID
+                + "DELETE FROM Wanted WHERE WantedID=" + wantedID;
+        PreparedStatement ps = conn.prepareStatement(query);
         ps.executeUpdate();
         ps.close();
         conn.close();

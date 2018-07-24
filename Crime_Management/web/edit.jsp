@@ -18,19 +18,19 @@
         <jsp:setProperty name="w" property="*"/>
         <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
-        <jsp:useBean id="p" class="model.PrisonModel" scope="request"/>
+
         
-        <form action="EditWantedServlet">
+        <form action="EditWantedServlet" onsubmit="return confirm()">
             
             <c:forEach var="x" items="${w.selectAll()}">
                 <p>
-                    <b>WantedID :</b><input type="text" value="${x.wID}" name="wID" readonly="readonly"/>
+                    <b>WantedID:  </b><label>${x.wID}</label>
                 </p>
                 <p>
-                    <b>Image    :</b><image src="${x.image}"/>
+                    <b>Image   :  </b><image src="${x.image}"/>
                 </p>
                 <p>
-                    <b>CrimeName: </b><input type="text" value="${x.cName}" name="cName"/>
+                    <b>CrimeName: </b><input type="text" value="${x.cName}" name="cName" required/>
                 </p>
                 <p>
                     <b>Gender   :</b>
@@ -48,12 +48,6 @@
                 </p>
                 <p>
                     <b>WantedDate  :</b><input type="date" name="wantedDate" value="${x.wDate}"/>
-                </p>
-                <p>
-                    <b>CatchedDate :</b><input type="date" name="catchedDate" value="${x.cDate}" disabled="disabled"/>
-                </p>
-                <p>
-                    <b>Status  :</b><input type="text" value="${x.status}" name="status" disabled="disabled"/>
                 </p>
                 <p>
                     <b>Detail  :</b><input type="text" value="${x.detail}" name="detail"/>
@@ -75,16 +69,6 @@
                         </c:forEach>
                     </select>
                 </p>
-                <p><b>PrisonName  :</b>
-                    <select name="prisonID" disabled="disabled">
-                        <option value="" ${x.pID == null? "selected": ""} ></option>
-                        <c:forEach var="i" items="${p.selectAll()}">
-                            <option value="${i.pID}" ${x.pID == i.pID? "selected": ""} 
-                                    ${param.prisonID == i.pID? "selected": ""}>${i.pName}</option>
-                        </c:forEach>
-                    </select>
-                </p>
-                <p>
                     <b>Comment :</b>
                 </p>
             </c:forEach>
