@@ -24,7 +24,7 @@ public class CrimeTypeModel {
        String name ="";
        ResultSet rs= conn.prepareStatement(query).executeQuery();
        while(rs.next()){
-           name = rs.getString("CrimeTypeName");
+           name = rs.getString("CrimeTypeID");
        }
        rs.close();
        conn.close();

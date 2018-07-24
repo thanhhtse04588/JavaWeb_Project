@@ -29,7 +29,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * @author Muscle_Life
  */
 @MultipartConfig
-public class AddWantedServlet extends HttpServlet {
+public class WantedServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -67,9 +67,9 @@ public class AddWantedServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (FileUploadException ex) {
-            Logger.getLogger(AddWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(AddWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -134,7 +134,7 @@ public class AddWantedServlet extends HttpServlet {
         try {
             model.addWanted(new Wanted(imgUrl, crimeName, gender, country, dob, offense, cTypeID, mID, wDate, status, detail));
         } catch (Exception ex) {
-            Logger.getLogger(AddWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WantedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
             getServletContext().getRequestDispatcher("/add.jsp").forward(request, response);

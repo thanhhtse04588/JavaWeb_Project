@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
-        <table border="1" cellspacing="0.5" >
+        <table border="1" cellspacing="2" >
                 <tr>
                     <th>WantedID</th>
                     <th>Image</th>

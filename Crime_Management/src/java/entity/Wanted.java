@@ -58,19 +58,6 @@ public class Wanted {
         this.detail = detail;
     }
 
-    public Wanted(int wID, String cName, String gender, String country, Date dob, String offense, int cTypeID, int mID, Date wDate, String detail) {
-        this.wID = wID;
-        this.cName = cName;
-        this.gender = gender;
-        this.country = country;
-        this.dob = dob;
-        this.offense = offense;
-        this.cTypeID = cTypeID;
-        this.mID = mID;
-        this.wDate = wDate;
-        this.detail = detail;
-    }
-
     public Wanted(int wID, String image, String cName, String gender, String country, Date dob, String offense, int cTypeID, int mID, Date wDate, Date cDate, int pID, String status, String detail) {
         this.wID = wID;
         this.image = image;
