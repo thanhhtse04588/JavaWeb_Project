@@ -14,24 +14,60 @@
     </head>
     <body>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
-        <<jsp:setProperty name="w" property="*"/>
+        <jsp:setProperty name="w" property="*"/>
         <c:forEach var="x" items="${w.selectAll()}">
-            <p><b>WantedID :</b>${x.wID}</p>
-            <p><b>Image    :</b><image src="${x.image}"/></p>
-            <p><b>CrimeName: </b>${x.cName}</p>
-            <p><b>Gender   :</b>${x.gender}</p>
-            <p><b>Country  :</b>${x.country}</p>
-            <p><b>DOB      :</b>${x.dob}</p>
-            <p><b>Offense  :</b>${x.offense}</p>
-            <p><b>CrimeType :</b>${x.getCrimeTypeName()}</p>
-            <p><b>MissionUnit :</b>${x.getMissionUnitName()}</p>
-            <p><b>WantedDate  :</b>${x.wDate}</p>
-            <p><b>CatchedDate :</b>${x.cDate}</p>
-            <p><b>PrisonName  :</b>${x.getPrisonName()}</p>
-            <p><b>Status  :</b>${x.status}</p>
-            <p><b>Detail  :</b>${x.detail}</p>
-            <p><b>Comment :</b></p>
+            <table border="1" cellspacing="0.5">
+                <tr>
+                    <th>WantedID:</th> <td> ${x.wID}</td> 
+                </tr>
+                <tr>
+                    <th>Image:</th> <td> <image src="${x.image}"/></td> 
+                </tr>
+                <tr>
+                    <th>CrimeName:</th> <td>${x.cName} </td> 
+                </tr>
+                <tr>
+                    <th> Gender:</th> <td>${x.gender}</td> 
+                </tr>
+                <tr>
+                    <th> Country:</th> <td>${x.country} </td> 
+                </tr>
+                <tr>
+                    <th>DOB:</th> <td>${x.dob} </td> 
+                </tr>
+                <tr>
+                    <th> Offense:</th> <td>${x.offense} </td> 
+                </tr>
+                <tr>
+                    <th> CrimeType:</th> <td>${x.getCrimeTypeName()}</td> 
+                </tr>
+                <tr>
+                    <th> MissionUnit:</th> <td> ${x.getMissionUnitName()}</td> 
+                </tr>
+                <tr>
+                    <th> WantedDate:</th> <td>${x.wDate} </td> 
+                </tr>
+                <tr>
+                    <th> CatchedDate:</th> <td>${x.cDate} </td> 
+                </tr>
+                <tr>
+                    <th>PrisonName : </th> <td>${x.getPrisonName()} </td> 
+                </tr>
+                <tr>
+                    <th>Status:</th> <td>${x.status} </td> 
+                </tr>
+                <tr>
+                    <th>Detail:</th> <td>${x.detail} </td> 
+                </tr>
+                <tr>
+                    <th>Comment:</th> <td> </td> 
+                </tr>
+                <br>
+                <button />
+            </table>
         </c:forEach>
+        <a href="edit.jsp?wantedID=${x.wID}"><button>Edit</button></a>
+        <a href="RemoveWantedServlet?wantedID=${x.wID}"><button>Remove</button></a>
 
     </body>
 </html>

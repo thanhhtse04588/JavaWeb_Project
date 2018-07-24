@@ -13,10 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <<jsp:useBean id="c" class="model.CrimeTypeModel" scope="session"/>
-        <<jsp:useBean id="m" class="model.MissionUnitModel" scope="session"/>
+        <<jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
+        <<jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
         <h2>Information Wanted</h2>
-        <form action="WantedServlet" method="POST" enctype="multipart/form-data">
+        <form action="AddWantedServlet" method="POST" enctype="multipart/form-data">
             
             <p>Image: <input type="file" name="uploadFile" /></p>
             
@@ -46,7 +46,7 @@
                 
             <p>Wanted Date : <input type="date" name="wantedDate" value="mm/dd/yyyy"/></p>
             
-            <p>Status: <input type="text" name="status" value="Wanted"readonly="readonly"/></p>
+            <p>Status: <input type="text" name="status" value="Wanted" readonly="readonly"/></p>
             
             <p>Detail: <textarea rows="4" cols="50" name="detail">Detail</textarea> </p>
             

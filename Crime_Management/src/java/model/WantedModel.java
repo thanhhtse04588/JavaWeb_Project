@@ -108,6 +108,28 @@ public class WantedModel {
         ps.setDate(9, w.getwDate());
         ps.setString(10, w.getStatus());
         ps.setString(11, w.getDetail());
+        
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+    }
+
+    public void editWantedDate(Wanted w) throws Exception {
+        Connection conn = new DBContext().getConnection();
+        String query = "UPDATE Wanted SET CrimeName = ?,Gender = ?,Country = ?,DOB =?, Offense =?, CrimeTypeID =?, MissionUnitID=?, WantedDate=? , Detail=? WHERE WantedID =?;";
+        PreparedStatement ps = conn.prepareStatement(query);
+        
+        ps.setString(1, w.getcName());
+        ps.setString(2, w.getGender());
+        ps.setString(3, w.getCountry());
+        ps.setDate(4, w.getDob());
+        ps.setString(5, w.getOffense());
+        ps.setInt(6, w.getcTypeID());
+        ps.setInt(7, w.getmID());
+        ps.setDate(8, w.getwDate());
+        ps.setString(9, w.getDetail());
+        ps.setInt(10, w.getwID());
+        
         ps.executeUpdate();
         ps.close();
         conn.close();
