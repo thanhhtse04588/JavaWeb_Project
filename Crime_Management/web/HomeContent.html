@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #img img{
+                width: 100%;
+                height:100%;
+            }
+        </style>
+    </head>
+    <body onload="setImage()">
+        <p id="img"></p>
+        <script type="text/javascript">
+            var img=new Array("police.jpg","prison.jpg","cell.jpg");
+            var x;
+            var i=0;
+            function setImage()
+            {
+                x=img[i];
+                document.getElementById("img").innerHTML="<img src='image/"+x+
+                        "' alt='abc'/>";
+                if(i==img.length-1)
+                {
+                    i=0;
+                }
+                else
+                {
+                    i++;
+                }
+                setTimeout(function(){setImage()}, 3000);
+            }
+            
+        </script>
+    </body>
+</html>
