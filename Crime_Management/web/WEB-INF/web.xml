@@ -2,11 +2,27 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>WantedServlet</servlet-name>
-        <servlet-class>controller.WantedServlet</servlet-class>
+        <servlet-class>controller.AddWantedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditWantedServlet</servlet-name>
+        <servlet-class>controller.EditWantedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveWantedServlet</servlet-name>
+        <servlet-class>controller.RemoveWantedServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>WantedServlet</servlet-name>
         <url-pattern>/WantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditWantedServlet</servlet-name>
+        <url-pattern>/EditWantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveWantedServlet</servlet-name>
+        <url-pattern>/RemoveWantedServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
