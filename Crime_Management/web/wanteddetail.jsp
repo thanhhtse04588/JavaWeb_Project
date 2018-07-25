@@ -107,7 +107,9 @@
             <br>
 
         <center><a href="edit.jsp?wantedID=${wantedID}" onclick=" return confirm('Do you really want to edit the form?');" ><button >Edit</button></a>
-            <a href="RemoveWantedServlet" onclick=" return confirm('Do you really want to remove the form?');"><button>Remove</button></a></center>
+            <a href="RemoveWantedServlet" onclick=" return confirm('Do you really want to remove the form?');"><button>Remove</button></a>
+            <a href="wantedtable.jsp" onclick=" return confirm('Do you really want to back to the Wanted Table?');"><button>Cancel</button></a></center>
+        
         </c:forEach>
 
 </body>

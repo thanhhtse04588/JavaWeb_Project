@@ -105,7 +105,7 @@ public class WantedModel {
         ps.setString(3, w.getGender());
         ps.setString(4, w.getCountry());
         ps.setDate(5, w.getDob());
-        ps.setString(6, w.getCountry());
+        ps.setString(6, w.getOffense());
         ps.setInt(7, w.getcTypeID());
         ps.setInt(8, w.getmID());
         ps.setDate(9, w.getwDate());

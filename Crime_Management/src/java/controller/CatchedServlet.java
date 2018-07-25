@@ -39,7 +39,6 @@ public class CatchedServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();    
             int wID =Integer.parseInt((String) session.getAttribute("wantedID"));
-            System.out.println("fhjdhfjhdsjfhshfjshjfhsdhfjdhfjh");
             Date cDate = Date.valueOf(request.getParameter("catchedDate"));
             int pID = Integer.valueOf(request.getParameter("prisonID"));
             WantedModel w = new WantedModel();
