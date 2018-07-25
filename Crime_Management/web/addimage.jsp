@@ -15,8 +15,8 @@
     <body>
 
         <h2>Update Crime Image to CrimeID =${param.wantedID} </h2>
-        <form action="AddWantedServlet?wantedID=${param.wantedID}" method="POST" enctype="multipart/form-data">   
-            <p>Image: <input type="file" name="uploadFile" accept="image/*" onchange="loadFile(event)"/></p>
+        <form action="AddWantedServlet?wantedID=${param.wantedID}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Do you really want to submit the form?');">   
+            <p>Image: <input type="file" name="uploadFile" accept="image/*" onchange="loadFile(event)" required="required"/></p>
              <img id="output"/>
              <input type="submit" value="Update"/>
         </form>  

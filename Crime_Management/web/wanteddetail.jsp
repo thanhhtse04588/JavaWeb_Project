@@ -103,15 +103,10 @@
                 <tr>
                     <th>Detail:</th> <td>${x.detail} </td> 
                 </tr>
-                <tr>
-                    <th>Comment:</th> <td> </td> 
-                </tr>
-                <br>
-                <button />
             </table>
             <br>
 
-        <center><a href="edit.jsp?"><button >Edit</button></a>
+        <center><a href="edit.jsp?wantedID=${wantedID}"><button >Edit</button></a>
             <a href="RemoveWantedServlet"><button>Remove</button></a></center>
         </c:forEach>
 

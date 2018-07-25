@@ -17,23 +17,23 @@
         <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
     <center><h2>Information Wanted</h2></center>
-    <form action="AddWantedServlet">
+    <form action="AddWantedServlet" onsubmit=" return confirm('Do you really want to submit the form?');">
         <table id="customers">
             <tr>
-                <th>Crime Name :  </th> <td><input type="text" name="cName" value="" /></td> 
+                <th>Crime Name :  </th> <td><input type="text" name="cName" value="" required="required"/></td> 
             </tr>
             <tr>
                 <th>Gender :</th> <td><input type="radio" name="gender" value="male" checked="checked"/> Male
                     <input type="radio" name="gender" value="female" /> Female</td> 
             </tr>
             <tr>
-                <th>Country: </th> <td><input type="text" name="country" value="" /></td> 
+                <th>Country: </th> <td><input type="text" name="country" value="" required="required"/></td> 
             </tr>
             <tr>
-                <th>DOB : </th> <td><input type="date" name="dob" value="mm/dd/yyyy"/></td> 
+                <th>DOB : </th> <td><input type="date" name="dob" value="yyyy/mm/dd" required="required"/></td> 
             </tr>
             <tr>
-                <th>Offense : </th> <td><textarea rows="4" cols="50" name="offense">Offense</textarea></td> 
+                <th>Offense : </th> <td><textarea rows="4" cols="50" name="offense" required="required">Offense</textarea></td> 
             </tr>
             <tr>
                 <th>CrimeType: </th> <td><select name="cType">
@@ -53,7 +53,7 @@
                 </td> 
             </tr>
             <tr>
-                <th>Wanted Date : </th> <td><input type="date" name="wantedDate" value="mm/dd/yyyy"/></td> 
+                <th>Wanted Date : </th> <td><input type="date" name="wantedDate" value="yyyy/mm/dd" required="required"/></td> 
             </tr>
             <tr>
                 <th>Status: </th> <td><input type="text" name="status" value="Wanted" readonly="readonly"/></td> 

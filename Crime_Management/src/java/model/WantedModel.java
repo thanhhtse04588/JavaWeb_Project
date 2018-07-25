@@ -86,6 +86,7 @@ public class WantedModel {
             String status = rs.getString("Status");
             String detail = rs.getString("detail");
             wanteds.add(new Wanted(wID, image, cName, gender, country, dob, offense, cTypeID, mID, wDate, cDate, pID, status, detail));
+            System.out.println("model.WantedModel.selectAll()");
         }
         wantedID=-1;
         rs.close();

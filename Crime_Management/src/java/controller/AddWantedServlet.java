@@ -47,7 +47,6 @@ public class AddWantedServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             // configures upload settings
             int wantedID = 0;
-            System.out.println("controller.AddWantedServlet.processRequest()ssssssssssssssssssssssssssssssss");
             String crimeName = request.getParameter("cName");
             String imgUrl = ""; // don't up image
             String gender = request.getParameter("gender");
