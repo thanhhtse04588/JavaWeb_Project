@@ -13,6 +13,7 @@
         <style>
             .menu{
                 position: static;
+                z-index: 9999;
             }
             .content
             {
@@ -21,12 +22,13 @@
             .menuFix{
                 top: 0;
                 position: fixed;
+                z-index: 9999
             }
         </style>
     </head>
     <body>
         <div><jsp:include page="Header.html"/></div>
-        <div class="menu" id="hmenu"><jsp:include page="MenuHome.html"/></div>
+        <div class="menu" id="hmenu"><jsp:include page="MenuHome.jsp"/></div>
         <div class="content"><jsp:include page="HomeContent.html"/></div>
         <div><jsp:include page="Footer.html"/></div>
         <script type="text/javascript">
