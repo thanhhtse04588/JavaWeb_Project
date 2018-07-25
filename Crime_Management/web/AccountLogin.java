@@ -53,7 +53,16 @@ public class AccountLogin extends HttpServlet {
             else
             {
                 session.setAttribute("Account", acc);
-                response.sendRedirect("loged.jsp");
+                if(acc.getType().equals("admin"))
+                {
+                    RequestDispatcher rd=request.getRequestDispatcher("admin/admin.jsp");
+                    rd.forward(request, response);
+                }
+                else
+                {
+                    RequestDispatcher rd=request.getRequestDispatcher("user/user.jsp");
+                    rd.forward(request, response);
+                }
             }
         }
     }
