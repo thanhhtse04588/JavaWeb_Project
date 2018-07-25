@@ -79,11 +79,11 @@
                                     <div class="container">
 
                                         <label><b>Catched Date</b></label>
+                                        <br>
                                         <input type="date" name="catchedDate" value="dd/mm/yyyy" required>
-
+                                        <br>
                                         <label><b>Prison ID</b></label>
                                         <select name="prisonID">
-                                            <option value="" ${param.prisonID == i.pID? "selected": ""} ></option>
                                             <c:forEach var="i" items="${p.selectAll()}">
                                                 <option value="${i.pID}"  ${param.prisonID == i.pID? "selected": ""}>${i.pName}</option>
                                             </c:forEach>
@@ -106,8 +106,8 @@
             </table>
             <br>
 
-        <center><a href="edit.jsp?wantedID=${wantedID}"><button >Edit</button></a>
-            <a href="RemoveWantedServlet"><button>Remove</button></a></center>
+        <center><a href="edit.jsp?wantedID=${wantedID}" onclick=" return confirm('Do you really want to edit the form?');" ><button >Edit</button></a>
+            <a href="RemoveWantedServlet" onclick=" return confirm('Do you really want to remove the form?');"><button>Remove</button></a></center>
         </c:forEach>
 
 </body>
