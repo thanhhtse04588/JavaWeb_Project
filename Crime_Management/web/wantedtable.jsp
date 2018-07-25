@@ -9,12 +9,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+           
+        </style>
+                <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
-        <table border="1" cellspacing="0.5" >
+        <jsp:useBean id="w" class="model.WantedModel" scope="session"/>
+        <table id="customers">
             <tr>
                 <th>WantedID</th>
                 <th>Image</th>
@@ -41,5 +45,6 @@
 
             </c:forEach>
         </table>
+        <a href="add.jsp"><button>Add new</button></a>
     </body>
 </html>

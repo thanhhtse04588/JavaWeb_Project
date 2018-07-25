@@ -26,7 +26,7 @@
                     </option>
                 </c:forEach>
             </select>
-            <table border="1" cellspacing="2" >
+            <table id="customers">
                 <tr>
                     <th>WantedID</th>
                     <th>Image</th>

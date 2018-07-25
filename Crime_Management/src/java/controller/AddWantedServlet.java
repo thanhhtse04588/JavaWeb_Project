@@ -41,14 +41,32 @@ public class AddWantedServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     // location to store file uploaded
-
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileUploadException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             // configures upload settings
+            int wantedID = 0;
+            System.out.println("controller.AddWantedServlet.processRequest()ssssssssssssssssssssssssssssssss");
+            String crimeName = request.getParameter("cName");
+            String imgUrl = ""; // don't up image
+            String gender = request.getParameter("gender");
+            String country = request.getParameter("country");
+            Date dob = Date.valueOf(request.getParameter("dob"));
+            String offense = request.getParameter("offence");
+            int cTypeID = Integer.valueOf(request.getParameter("cType"));
+            int mID = Integer.valueOf(request.getParameter("mUnitID"));
+            Date wDate = Date.valueOf(request.getParameter("wantedDate"));
+            String status = request.getParameter("status");
+            String detail = request.getParameter("detail");
+            WantedModel model = new WantedModel();
 
+            try {
+                wantedID=model.addWanted(new Wanted(imgUrl, crimeName, gender, country, dob, offense, cTypeID, mID, wDate, status, detail));
+            } catch (Exception ex) {
+                Logger.getLogger(AddWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            getServletContext().getRequestDispatcher("/addimage.jsp?wantedID="+wantedID).forward(request, response);
         }
     }
 
@@ -82,63 +100,51 @@ public class AddWantedServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public static String FOLDER_UPLOAD = "image";
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                    DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-            String nameImg =""  ; // file path
-            try {
-                List<FileItem> fileItems = upload.parseRequest(request);
-                for (FileItem fileItem : fileItems) {
-                    if (!fileItem.isFormField()) {
-                        // xử lý file
-                        nameImg = new File(fileItem.getName()).getName();
-                        if (!nameImg.equals("")) {
+        DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+        String nameImg = ""; // file path
+        try {
+            List<FileItem> fileItems = upload.parseRequest(request);
+            for (FileItem fileItem : fileItems) {
+                if (!fileItem.isFormField()) {
+                    // xử lý file
+                    nameImg = new File(fileItem.getName()).getName();
+                    if (!nameImg.equals("")) {
 
-                            String dirUrl = request.getServletContext().getRealPath("") + File.separator + FOLDER_UPLOAD; // folder path
-                            File dir = new File(dirUrl);
-                            if (!dir.exists()) {
-                                dir.mkdir();
-                            }
-                            String imageUrl = dirUrl + File.separator + nameImg;
-                            File file = new File(imageUrl);
-                            try {
-                                fileItem.write(file);
-                                System.out.println("UPLOAD SUCCESSFUL...!");
-                            } catch (Exception e) {
-                                System.out.println("UPLOAD FAILED...!");
-                                e.printStackTrace();
-                            }
+                        String dirUrl = request.getServletContext().getRealPath("") + File.separator + FOLDER_UPLOAD; // folder path
+                        File dir = new File(dirUrl);
+                        if (!dir.exists()) {
+                            dir.mkdir();
+                        }
+                        String imageUrl = dirUrl + File.separator + nameImg;
+                        File file = new File(imageUrl);
+                        try {
+                            fileItem.write(file);
+                            System.out.println("UPLOAD SUCCESSFUL...!");
+                        } catch (Exception e) {
+                            System.out.println("UPLOAD FAILED...!");
+                            e.printStackTrace();
                         }
                     }
                 }
-            } catch (FileUploadException e) {
-                e.printStackTrace();
             }
-            //end upload
-            
-            String imgUrl = FOLDER_UPLOAD +"/" + nameImg;
-            String crimeName = request.getParameter("cName");
-            String gender = request.getParameter("gender");
-            String country = request.getParameter("country");
-            Date dob = Date.valueOf(request.getParameter("dob"));
-            String offense = request.getParameter("offence");
-            int cTypeID = Integer.valueOf(request.getParameter("cType"));
-            int mID = Integer.valueOf(request.getParameter("mUnitID"));
-            Date wDate = Date.valueOf(request.getParameter("wantedDate"));
-            String status = request.getParameter("status");
-            String detail = request.getParameter("detail");
-            WantedModel model = new WantedModel();
-            
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+        //end upload
+        int wantedID = Integer.valueOf(request.getParameter("wantedID"));
+        String imgUrl = FOLDER_UPLOAD + "/" + nameImg;
+        WantedModel model = new WantedModel();
         try {
-            model.addWanted(new Wanted(imgUrl, crimeName, gender, country, dob, offense, cTypeID, mID, wDate, status, detail));
+            model.addImageByWantedID(imgUrl,wantedID);
         } catch (Exception ex) {
             Logger.getLogger(AddWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-            getServletContext().getRequestDispatcher("/add.jsp").forward(request, response);
-           
+        getServletContext().getRequestDispatcher("/wantedtable.jsp").forward(request, response);
 
     }
 

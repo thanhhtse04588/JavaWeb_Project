@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
@@ -26,7 +27,7 @@
                     </option>
                 </c:forEach>
             </select>
-            <table border="1" cellspacing="2" >
+            <table id="customers">
                 <tr>
                     <th>WantedID</th>
                     <th>Image</th>

@@ -10,11 +10,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
         <jsp:setProperty name="w" property="*"/>
         <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
@@ -30,7 +30,7 @@
                     <b>Image   :  </b><image src="${x.image}"/>
                 </p>
                 <p>
-                    <b>CrimeName: </b><input type="text" value="${x.cName}" name="cName" required/>
+                    <b>CrimeName: </b><input type="text" value="${x.cName}" name="cName" />
                 </p>
                 <p>
                     <b>Gender   :</b>
@@ -38,7 +38,7 @@
                     <input type="radio" name="gender" value="Female"  checked=${x.gender =='Female'? "checked": ""} /> Female
                 </p>
                 <p>
-                    <b>Country  :</b><input type="text" value="${x.country}" name="country"/>
+                    <b>Country  :</b><input type="text" value="${x.country}" name="country" />
                 </p>
                 <p>
                     <b>DOB      :</b><input type="date" value="${x.dob}" name="dob"/>

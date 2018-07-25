@@ -9,19 +9,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
+
         <jsp:setProperty name="w" property="*"/>
         <c:forEach var="x" items="${w.selectAll()}">
-            <table border="1" cellspacing="0.5">
+            <table id="customers">
                 <tr>
                     <th>WantedID:</th> <td> ${x.wID}</td> 
                 </tr>
                 <tr>
-                    <th>Image:</th> <td> <image src="${x.image}"/></td> 
+                    <th>Image:</th> <td> <img src="${x.image}"/></td> 
                 </tr>
                 <tr>
                     <th>CrimeName:</th> <td>${x.cName} </td> 
