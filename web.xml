@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AddWantedServlet</servlet-name>
+        <servlet-class>controller.AddWantedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditWantedServlet</servlet-name>
+        <servlet-class>controller.EditWantedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveWantedServlet</servlet-name>
+        <servlet-class>controller.RemoveWantedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CatchedServlet</servlet-name>
+        <servlet-class>controller.CatchedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddWantedServlet</servlet-name>
+        <url-pattern>/AddWantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditWantedServlet</servlet-name>
+        <url-pattern>/EditWantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveWantedServlet</servlet-name>
+        <url-pattern>/RemoveWantedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CatchedServlet</servlet-name>
+        <url-pattern>/CatchedServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
