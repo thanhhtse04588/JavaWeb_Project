@@ -8,16 +8,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-           
-        </style>
-                <link href="<c:url value="/css/css.css" />" rel="stylesheet">
+    <head>  
+        <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body>          
         <jsp:useBean id="w" class="model.WantedModel" scope="session"/>
+        <center><h2>Wanted Table</h2></center>
         <table id="customers">
             <tr>
                 <th>WantedID</th>
@@ -26,7 +24,6 @@
                 <th>Gender</th>
                 <th>TypeCrime</th>
                 <th>Status</th>
-                <th>Catch</th>
                 <th>Detail</th>
             </tr>
             <c:forEach var="x" items="${w.selectAll()}">
@@ -37,21 +34,11 @@
                     <td>${x.gender}</td>
                     <td>${x.getCrimeTypeName()}</td>
                     <td>${x.status}</td>
-                    <td><c:if test="${x.status == 'Wanted'}">
-                            <c:if test="${sessionScope.Account.type=='admin'}">
-                            <a href="catched.jsp?wantedID=${x.wID}"><button>Catched</button></a>
-                            </c:if>
-                            <c:otherwise>
-                                Wanted
-                            </c:otherwise>
-                        </c:if></td>
                     <td><a href="wanteddetail.jsp?wantedID=${x.wID}">See more</a></td>
                 </tr>  
 
             </c:forEach>
         </table>
-        <c:if test="${sessionScope.Account.type=='admin'}">
-        <a href="add.jsp"><button>Add new</button></a>
-        </c:if>
-    </body>
+    <center><a href="add.jsp"><button>Add new</button></a></center>
+</body>
 </html>
