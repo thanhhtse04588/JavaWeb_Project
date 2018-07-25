@@ -62,7 +62,7 @@
             <li><a href="Login.jsp">Login</a></li>
             <li><a href="Register.jsp">Register</a></li>
             <li>Welcome</li>
-            <li>${param.userName}</li>
+            <li>${sessionScope.Account.userName}</li>
           </ul>
         </div>
     </body>

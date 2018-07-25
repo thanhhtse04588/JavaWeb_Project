@@ -26,9 +26,7 @@
     </head>
     <body>
         <div><jsp:include page="/Header.html"/></div>
-        <div class="menu" id="amenu"><jsp:include page="menu.jsp">
-            <jsp:param name="userName" value="${Account.userName}"/>  
-        </jsp:include></div>
+        <div class="menu" id="amenu"><jsp:include page="menu.jsp"/> </div>
         <div><jsp:include page="/Footer.html"/></div>
         <script type="text/javascript">
             window.onscroll=function() {menuFix()};
@@ -37,11 +35,11 @@
                 if(document.body.scrollTop>100||
                         document.documentElement.scrollTop>100)
                 {
-                    document.getElementById("hmenu").className="menuFix";
+                    document.getElementById("amenu").className="menuFix";
                 }
                 else
                 {
-                    document.getElementById("hmenu").className="menu";
+                    document.getElementById("amenu").className="menu";
                 }
             }
         </script>
