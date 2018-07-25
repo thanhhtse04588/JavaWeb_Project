@@ -38,13 +38,20 @@
                     <td>${x.getCrimeTypeName()}</td>
                     <td>${x.status}</td>
                     <td><c:if test="${x.status == 'Wanted'}">
+                            <c:if test="${sessionScope.Account.type=='admin'}">
                             <a href="catched.jsp?wantedID=${x.wID}"><button>Catched</button></a>
+                            </c:if>
+                            <c:otherwise>
+                                Wanted
+                            </c:otherwise>
                         </c:if></td>
                     <td><a href="wanteddetail.jsp?wantedID=${x.wID}">See more</a></td>
                 </tr>  
 
             </c:forEach>
         </table>
+        <c:if test="${sessionScope.Account.type=='admin'}">
         <a href="add.jsp"><button>Add new</button></a>
+        </c:if>
     </body>
 </html>
