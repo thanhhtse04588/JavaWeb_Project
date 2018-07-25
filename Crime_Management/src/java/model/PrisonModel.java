@@ -6,7 +6,7 @@
 package model;
 
 import context.DBContext;
-import entity.MissionUnit;
+import entity.Prison;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,32 +16,33 @@ import java.util.List;
  *
  * @author Muscle_Life
  */
-public class MissionUnitModel {
+public class PrisonModel {
 
-    public static String getMissionUnitNameByID(int mID) throws Exception {
-        Connection conn = new DBContext().getConnection();
-        String query = "SELECT * FROM MissionUnit WHERE MissionUnitID="+mID;
+    public static String getPrisonNameByID(int prisonID) throws Exception {
+          Connection conn = new DBContext().getConnection();
+        String query = "SELECT * FROM Prison WHERE PrisonID="+prisonID;
         ResultSet rs = conn.prepareStatement(query).executeQuery();
         String name = "";
         while(rs.next()){
-            name = rs.getString("MissionUnitName");
+            name = rs.getString("PrisonName");
         }
         rs.close();
         conn.close();
         return name;
     }
-     public List<MissionUnit> selectAll() throws Exception {
+      public List<Prison> selectAll() throws Exception {
         Connection conn = new DBContext().getConnection();
-        String query = "SELECT * FROM MissionUnit";
-        List<MissionUnit> m = new ArrayList<>();
+        String query = "SELECT * FROM Prison";
+        List<Prison> p = new ArrayList<>();
         ResultSet rs = conn.prepareStatement(query).executeQuery();
         while (rs.next()) {
-        int mID = rs.getInt("MissionUnitID");
-        String mName = rs.getString("MissionUnitName");
-            m.add(new MissionUnit(mID, mName));
+        int pID = rs.getInt("PrisonID");
+        String pName = rs.getString("PrisonName");
+            p.add(new Prison(pID, pName));
         }
         rs.close();
         conn.close();
-        return m;
+        return p;
     }
+    
 }
