@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,6 +43,7 @@ public class AccountLogin extends HttpServlet {
             String pass=Md5.md5(request.getParameter("txtPass"));
             DAOAccount dao=new DAOAccount();
             Account acc=dao.getAccount(username);
+            HttpSession session=request.getSession();
             if(acc.getType().equals("none")||!acc.getPassWord().equals(pass))
             {
                 request.setAttribute("ErrorMess", "Username or password wrong");
@@ -50,8 +52,7 @@ public class AccountLogin extends HttpServlet {
             }
             else
             {
-                request.setAttribute("Account", acc);
-                String type=acc.getType();
+                session.setAttribute("Account", acc);
                 if(acc.getType().equals("admin"))
                 {
                     RequestDispatcher rd=request.getRequestDispatcher("admin/admin.jsp");
