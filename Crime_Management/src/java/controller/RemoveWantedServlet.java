@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.WantedModel;
 
 /**
@@ -35,10 +37,13 @@ public class RemoveWantedServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int wID = Integer.valueOf(request.getParameter("wantedID"));
+            HttpSession session = request.getSession();
+            int wID = Integer.parseInt((String) session.getAttribute("wantedID"));
+
             WantedModel w = new WantedModel();
             w.removeWanted(wID);
-            getServletContext().getRequestDispatcher("/wantedtable.jsp").forward(request, response);
+            session.removeAttribute("wantedID");
+            response.sendRedirect("wantedtable.jsp");
         }
     }
 

@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.WantedModel;
 
 /**
@@ -36,20 +37,7 @@ public class EditWantedServlet extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            int wID = Integer.parseInt(request.getParameter("wID"));
-            String cName = request.getParameter("cName");
-            String gender= request.getParameter("gender");
-            String country = request.getParameter("country");
-            Date dob =Date.valueOf(request.getParameter("dob"));
-            String offense = request.getParameter("offense");
-            int cTypeID =Integer.valueOf(request.getParameter("cType"));
-            int mID =Integer.valueOf(request.getParameter("mUnitID"));
-            Date wDate =Date.valueOf(request.getParameter("wantedDate"));
-            String detail =request.getParameter("detail");
-            WantedModel w = new WantedModel();
-            w.editWantedDate(new Wanted(wID, cName, gender, country, dob, offense, cTypeID, mID, wDate, detail));
-            getServletContext().getRequestDispatcher("/wanteddetail.jsp?wantedID="+wID).forward(request, response);
+
         }
     }
 
@@ -84,7 +72,22 @@ public class EditWantedServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();    
+            int wID =Integer.parseInt((String) session.getAttribute("wantedID"));
+            
+            String cName = request.getParameter("cName");
+            String gender = request.getParameter("gender");
+            String country = request.getParameter("country");
+            Date dob = Date.valueOf(request.getParameter("dob"));
+            String offense = request.getParameter("offense");
+            int cTypeID = Integer.valueOf(request.getParameter("cType"));
+            int mID = Integer.valueOf(request.getParameter("mUnitID"));
+            Date wDate = Date.valueOf(request.getParameter("wantedDate"));
+            String detail = request.getParameter("detail");
+            WantedModel w = new WantedModel();
+            w.editWantedDate(new Wanted(wID, cName, gender, country, dob, offense, cTypeID, mID, wDate, detail));
+            getServletContext().getRequestDispatcher("/wanteddetail.jsp?wantedID=" + wID).forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(EditWantedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

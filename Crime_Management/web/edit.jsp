@@ -20,11 +20,11 @@
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
 
         
-        <form action="EditWantedServlet" onsubmit="return confirm()">
+        <form action="EditWantedServlet" method="POST" onsubmit="return confirm()">
             
             <c:forEach var="x" items="${w.selectAll()}">
                 <p>
-                    <b>WantedID:  </b><label>${x.wID}</label>
+                    <b>WantedID:  </b><label>${wantedID}</label>
                 </p>
                 <p>
                     <b>Image   :  </b><image src="${x.image}"/>

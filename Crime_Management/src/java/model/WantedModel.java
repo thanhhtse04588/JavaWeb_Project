@@ -67,7 +67,7 @@ public class WantedModel {
         if (prisonID != -1) {
             query = "SELECT * FROM WANTED WHERE PrisonID =" + prisonID;
         }
-
+        System.out.println(wantedID);
         List<Wanted> wanteds = new ArrayList<>();
         ResultSet rs = conn.prepareStatement(query).executeQuery();
         while (rs.next()) {
@@ -87,6 +87,7 @@ public class WantedModel {
             String detail = rs.getString("detail");
             wanteds.add(new Wanted(wID, image, cName, gender, country, dob, offense, cTypeID, mID, wDate, cDate, pID, status, detail));
         }
+        wantedID=-1;
         rs.close();
         conn.close();
         return wanteds;
@@ -95,8 +96,7 @@ public class WantedModel {
     public int addWanted(Wanted w) throws Exception {
         int wID=0;
         Connection conn = new DBContext().getConnection();
-        String query = "INSERT INTO Wanted (Image, CrimeName, Gender,Country,DOB,Offense,CrimeTypeID,MissionUnitID,WantedDate,Status,Detail)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?); ";
+        String query = "INSERT INTO Wanted (Image, CrimeName, Gender,Country,DOB,Offense,CrimeTypeID,MissionUnitID,WantedDate,Status,Detail) VALUES (?,?,?,?,?,?,?,?,?,?,?); ";
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1, w.getImage());
@@ -157,6 +157,18 @@ public class WantedModel {
         String query = "DELETE FROM Comment WHERE WantedID=" + wantedID
                 + "DELETE FROM Wanted WHERE WantedID=" + wantedID;
         PreparedStatement ps = conn.prepareStatement(query);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+    }
+
+    public void catched(int wID, Date cDate, int pID) throws Exception {
+       Connection conn = new DBContext().getConnection();
+        String query = "UPDATE Wanted SET Status ='Catched' ,CatchedDate =?, PrisonID =?  WHERE WantedID =?;";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setDate(1, cDate);
+        ps.setInt(2, pID);
+        ps.setInt(3, wID);
         ps.executeUpdate();
         ps.close();
         conn.close();

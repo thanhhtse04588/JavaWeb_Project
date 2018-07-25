@@ -13,43 +13,56 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <<jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
-        <<jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
-        <h2>Information Wanted</h2>
-        <form action="AddWantedServlet">
-            
-            <p>Crime Name :  <input type="text" name="cName" value="" /></p>
+    <body >
+        <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
+        <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
+    <center><h2>Information Wanted</h2></center>
+    <form action="AddWantedServlet">
+        <table id="customers">
+            <tr>
+                <th>Crime Name :  </th> <td><input type="text" name="cName" value="" /></td> 
+            </tr>
+            <tr>
+                <th>Gender :</th> <td><input type="radio" name="gender" value="male" checked="checked"/> Male
+                    <input type="radio" name="gender" value="female" /> Female</td> 
+            </tr>
+            <tr>
+                <th>Country: </th> <td><input type="text" name="country" value="" /></td> 
+            </tr>
+            <tr>
+                <th>DOB : </th> <td><input type="date" name="dob" value="mm/dd/yyyy"/></td> 
+            </tr>
+            <tr>
+                <th>Offense : </th> <td><textarea rows="4" cols="50" name="offense">Offense</textarea></td> 
+            </tr>
+            <tr>
+                <th>CrimeType: </th> <td><select name="cType">
 
-            <p>Gender : <input type="radio" name="gender" value="male" /> Male
-                <input type="radio" name="gender" value="female" /> Female</p>
+                        <c:forEach var="x" items="${c.selectAll()}">
+                            <option value="${x.cTypeID}" ${param.cType == x.cTypeID ? "selected":""}>${x.cTypeName}</option>
+                        </c:forEach>              
+                    </select></td> 
+            </tr>
 
-            <p>Country: <input type="text" name="country" value="" /></p>
-
-            <p>DOB : <input type="date" name="dob" value="mm/dd/yyyy"/></p>
-
-            <p>Offense : <textarea rows="4" cols="50" name="offense">Offense</textarea></p>
-
-            <p>CrimeType: <select name="cType">
-
-                    <c:forEach var="x" items="${c.selectAll()}">
-                        <option value="${x.cTypeID}" ${param.cType == x.cTypeID ? "selected":""}>${x.cTypeName}</option>
-                    </c:forEach>              
-                </select></p>
-
-            <p>Mission Unit: <select name="mUnitID">
+            <tr>
+                <th>Mission Unit:  </th> <td><select name="mUnitID">
                     <c:forEach var="y" items="${m.selectAll()}">
-                        <option value="${y.mID}" ${param.mUnitID == y.mID ? "selected":""}>${y.mName}</option>
-                    </c:forEach>
-                </select></p>
-
-            <p>Wanted Date : <input type="date" name="wantedDate" value="mm/dd/yyyy"/></p>
-
-            <p>Status: <input type="text" name="status" value="Wanted" readonly="readonly"/></p>
-
-            <p>Detail: <textarea rows="4" cols="50" name="detail">Detail</textarea> </p>
-
-            <p><input type="submit" value="Submit" /></p>
-        </form>
-    </body>
+                            <option value="${y.mID}" ${param.mUnitID == y.mID ? "selected":""}>${y.mName}</option>
+                        </c:forEach>
+                    </select>
+                </td> 
+            </tr>
+            <tr>
+                <th>Wanted Date : </th> <td><input type="date" name="wantedDate" value="mm/dd/yyyy"/></td> 
+            </tr>
+            <tr>
+                <th>Status: </th> <td><input type="text" name="status" value="Wanted" readonly="readonly"/></td> 
+            </tr>
+            <tr>
+                <th>Detail: </th> <td><textarea rows="4" cols="50" name="detail">Detail</textarea></td> 
+            </tr>
+        </table>
+        <center><button type="submit">Add</button></center>
+    </form>
+</body>
 </html>
