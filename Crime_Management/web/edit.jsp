@@ -15,6 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="nhung.jsp" %>
         <jsp:setProperty name="w" property="*"/>
         <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>

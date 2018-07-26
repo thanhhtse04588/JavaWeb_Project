@@ -14,6 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body >
+        <%@ include file="nhung.jsp" %>
         <jsp:useBean id="c" class="model.CrimeTypeModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
     <center><h2>Information Wanted</h2></center>

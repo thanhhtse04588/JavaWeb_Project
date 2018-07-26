@@ -21,6 +21,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="nhung.jsp" %>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
         <jsp:useBean id="m" class="model.MissionUnitModel" scope="request"/>
         <jsp:setProperty name="w" property="*"/>

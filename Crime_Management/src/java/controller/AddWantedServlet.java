@@ -52,7 +52,7 @@ public class AddWantedServlet extends HttpServlet {
             String gender = request.getParameter("gender");
             String country = request.getParameter("country");
             Date dob = Date.valueOf(request.getParameter("dob"));
-            String offense = request.getParameter("offence");
+            String offense = request.getParameter("offense");
             int cTypeID = Integer.valueOf(request.getParameter("cType"));
             int mID = Integer.valueOf(request.getParameter("mUnitID"));
             Date wDate = Date.valueOf(request.getParameter("wantedDate"));

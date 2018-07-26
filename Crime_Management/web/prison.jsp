@@ -9,23 +9,34 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            center {
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+        <link href="<c:url value="/css/css.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="nhung.jsp" %>
         <jsp:useBean id="w" class="model.WantedModel" scope="request"/>
         <jsp:useBean id="p" class="model.PrisonModel" scope="request"/>
-        <<jsp:setProperty name="w" property="*"/>
+        <jsp:setProperty name="w" property="*"/>
+
         <form action="prison.jsp">
-            <b>Select an Prison:</b> 
-            <select name="prisonID" onchange="document.forms[0].submit()">
-                <option value="" ${param.prisonID ==""? "selected": ""}> </option>
-                <c:forEach var="x" items="${p.selectAll()}">
-                    <option value="${x.pID}" ${x.pID== param.prisonID? "selected": ""}>
-                        ${x.pName}
-                    </option>
-                </c:forEach>
-            </select>
+            <center>
+                <b>Select an Prison:</b> 
+                <select name="prisonID" onchange="document.forms[0].submit()">
+                    <option value="" ${param.prisonID ==""? "selected": ""}> </option>
+                    <c:forEach var="x" items="${p.selectAll()}">
+                        <option value="${x.pID}" ${x.pID== param.prisonID? "selected": ""}>
+                            ${x.pName}
+                        </option>
+                    </c:forEach>
+                </select></center>
             <table id="customers">
                 <tr>
                     <th>WantedID</th>
@@ -34,6 +45,7 @@
                     <th>Gender</th>
                     <th>TypeCrime</th>
                     <th>Status</th>
+                    <th>Detail</th>
                 </tr>
                 <c:forEach var="x" items="${w.selectAll()}">
                     <tr>
@@ -49,5 +61,6 @@
                 </c:forEach>
             </table>
         </form>
-    </body>
+    <center><a href="add.jsp"><button>Add new</button></a></center>
+</body>
 </html>

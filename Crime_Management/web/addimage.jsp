@@ -22,6 +22,7 @@
 
     </head>
     <body>
+        <%@ include file="nhung.jsp" %>
     <center>
         <h2>Update Image</h2>
         <form action="AddWantedServlet?wantedID=${param.wantedID}" method="POST" enctype="multipart/form-data" onsubmit=" return confirm('Do you really want to submit the form?');">   

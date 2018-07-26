@@ -16,6 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="nhung.jsp" %>
         <jsp:setProperty name="w" property="*"/>
         <jsp:useBean id="p" class="model.PrisonModel" scope="request"/>
         <c:set var="wantedID" value="${param.wantedID}" scope="session"  />
